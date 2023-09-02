@@ -26,8 +26,8 @@ function invokeAction({ action, id, name, email, phone }) {
         return console.log(deleteContact); 
       break;
 
-    // default:
-    //   console.warn('\x1B[31m Unknown action type!');
+    default:
+      console.warn('\x1B[31m Unknown action type!');
   }
 }
 
