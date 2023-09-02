@@ -1,29 +1,39 @@
-// index.js
 console.log('index.js file is started');
-// const contacts = require('./db/contacts.json'); 
 const contacts = require('./contacts.js')
 const argv = require('yargs').argv;
 
-function invokeAction({ action, id, name, email, phone }) {
+async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case 'list':
-        const allContacts = contacts.listContacts();
-        return console.log(allContacts);
+      const allContacts = await contacts.listContacts();
+      console.log(allContacts);
       break;
 
     case 'get':
-        const oneContact = contacts.getContactById(id);
-        return console.log(oneContact);
+      try {
+        const oneContact = await contacts.getContactById(id);
+        if (oneContact) {
+          console.log(oneContact);
+        } else {
+          console.log("Contact not found");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
       break;
 
     case 'add':
-        const newContact = contacts.addContact(name, email, phone);
-        return console.log(newContact);
+      const newContact = await contacts.addContact(name, email, phone);
+      console.log(newContact);
       break;
 
     case 'remove':
-        const deleteContact = contacts.removeContact(id);
-        return console.log(deleteContact); 
+      const deleteContact = await contacts.removeContact(id);
+      if (deleteContact) {
+        console.log(deleteContact);
+      } else {
+        console.log("Contact not found");
+      }
       break;
 
     default:
