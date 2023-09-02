@@ -13,7 +13,7 @@ function listContacts() {
         });
 }
 
-function getContactById(contactId) {
+function getContactById(id) {
     const contactId = String(id);
     const contacts = listContacts();
     const result = contacts.find(item => item.id === contactId);
